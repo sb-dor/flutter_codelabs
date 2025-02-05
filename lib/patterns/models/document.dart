@@ -1,10 +1,15 @@
 import 'dart:convert';
 
 class Document {
+  final String? type;
+  final String? text;
   //
-  Document() : _json = jsonDecode(documentJson);
+  Document({
+    this.text,
+    this.type,
+  }) : _json = jsonDecode(documentJson);
 
-  final Map<String, Object?> _json;
+  final Map<String, dynamic?> _json;
 
   // Records are a light and easy way to return multiple values
   // from a single function call and assign them to a variable
@@ -15,10 +20,28 @@ class Document {
   // if you do not want to get likeabove and want to get records by their name
   // just write their inside "{}" brackets and get by their names
   ({String title, DateTime? datetime}) get recordMetada {
-    final title = "Title";
-    final datetime = DateTime.now();
+    final title = _json['metadata']['title'];
+    final datetime = DateTime.parse(_json['metadata']['modified']);
 
     return (title: title, datetime: datetime);
+  }
+
+  factory Document.fromjson(Map<String, Object?> json) {
+    if (json case {"type": final type, "text": final text}) {
+      return Document(
+        type: type as String?,
+        text: text as String?,
+      );
+    }
+    throw FormatException("Exception was thrown on");
+  }
+
+  List<Document> get documents {
+    if (_json case {"blocks": List blocList}) {
+      return [for (final each in blocList) Document.fromjson(each)];
+    } else {
+      throw FormatException("Unexpected type of json");
+    }
   }
 }
 
