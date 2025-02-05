@@ -21,6 +21,8 @@ class _PatternsWidgetState extends State<PatternsWidget> {
   // The first field is positional and unnamed, and the second field is named "modified".
   late final (String name, {String sirname}) _nameOfStudent;
 
+  late final List<Document> _documents;
+
   //
   final _document = Document();
 
@@ -28,6 +30,8 @@ class _PatternsWidgetState extends State<PatternsWidget> {
   void initState() {
     super.initState();
     _recordData = _document.recordMetada;
+
+    _documents = Document().documents;
 
     _locations = (latitude: 150, longitude: 100);
 
@@ -96,6 +100,9 @@ class _PatternsWidgetState extends State<PatternsWidget> {
           Text(_nameOfStudent.$1),
           // you can call modified (named) fields like this :
           Text(_nameOfStudent.sirname),
+
+          // don't do this
+          for (final each in _documents) Text("Type: ${each.type} | text: ${each.text}"),
         ],
       ),
     );
