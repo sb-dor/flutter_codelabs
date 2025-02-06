@@ -33,6 +33,8 @@ class _PatternsWidgetState extends State<PatternsWidget> {
 
     _documents = Document().documents;
 
+    _document.checkingJson({"success": true, "message" : "message"});
+
     _locations = (latitude: 150, longitude: 100);
 
     _nameOfStudent = ("Alex", sirname: "Bezrukov");

@@ -43,6 +43,16 @@ class Document {
       throw FormatException("Unexpected type of json");
     }
   }
+
+  void checkingJson(Map<String, dynamic> json) async {
+    if (json case {"success": final bool success, "message": final String message}) {
+      print("success with message: $success | $message");
+    }
+
+    if (json case {"success": final bool success}) {
+      print('only success: $success');
+    }
+  }
 }
 
 const documentJson = '''
