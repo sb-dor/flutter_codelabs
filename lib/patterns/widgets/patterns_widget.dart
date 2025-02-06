@@ -33,7 +33,11 @@ class _PatternsWidgetState extends State<PatternsWidget> {
 
     _documents = Document().documents;
 
-    _document.checkingJson({"success": true, "message" : "message"});
+    _document.checkingJson({
+      "success": true,
+      "message": "message",
+      "something_else": "",
+    });
 
     _locations = (latitude: 150, longitude: 100);
 
